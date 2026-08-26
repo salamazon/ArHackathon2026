@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "max_time_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of time steps for the simulation"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the test case"
+        }
+      },
+      "required": ["max_time_steps"]
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the node"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the node"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["storage", "station", "travel"],
+            "description": "Kind of location this node represents (defaults to travel)"
+          },
+          "capacity": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of drive units that may occupy this node or be in transit toward it at the same time (unlimited if not specified)"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from_node": {
+            "type": "integer",
+            "description": "ID of one endpoint of the edge"
+          },
+          "to_node": {
+            "type": "integer",
+            "description": "ID of the other endpoint of the edge"
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 1,
+            "description": "Weight/length of the edge (time steps required to traverse)"
+          },
+          "capacity": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of drive units that may be traversing this edge at the same time, both directions combined (unlimited if not specified)"
+          },
+          "bidirectional": {
+            "type": "boolean",
+            "description": "Whether the edge can be traversed in both directions (defaults to true)"
+          }
+        },
+        "required": ["from_node", "to_node", "weight"]
+      }
+    },
+    "drive_units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the drive unit"
+          },
+          "start_node": {
+            "type": "integer",
+            "description": "ID of the node where the drive unit starts"
+          },
+          "capacity": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of pods the drive unit can carry at once (defaults to 1)"
+          }
+        },
+        "required": ["id", "start_node"]
+      }
+    },
+    "pods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the pod"
+          },
+          "source_node": {
+            "type": "integer",
+            "description": "ID of the node where the pod appears"
+          },
+          "destination_station": {
+            "type": "integer",
+            "description": "ID of the station node the pod must be delivered to"
+          },
+          "entry_time": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Time step when the pod enters the system"
+          }
+        },
+        "required": ["id", "source_node", "destination_station", "entry_time"]
+      }
+    }
+  },
+  "required": ["nodes", "edges", "drive_units", "pods"]
+}

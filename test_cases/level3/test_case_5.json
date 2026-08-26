@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "max_time_steps": 120,
+    "description": "Level 3: one station with capacity 1 and three drive units delivering four pods to it. Only one unit may be at (or inbound to) the station at a time, so deliveries must be sequenced and the dock kept clear."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-A", "type": "storage"},
+    {"id": 1, "name": "Parking-1", "type": "travel"},
+    {"id": 2, "name": "Parking-2", "type": "travel"},
+    {"id": 3, "name": "Parking-3", "type": "travel"},
+    {"id": 4, "name": "Approach", "type": "travel"},
+    {"id": 5, "name": "Station-1", "type": "station", "capacity": 1}
+  ],
+  "edges": [
+    {"from_node": 1, "to_node": 0, "weight": 2},
+    {"from_node": 2, "to_node": 0, "weight": 2},
+    {"from_node": 3, "to_node": 0, "weight": 2},
+    {"from_node": 0, "to_node": 4, "weight": 2},
+    {"from_node": 4, "to_node": 5, "weight": 3}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 1},
+    {"id": 1, "start_node": 2},
+    {"id": 2, "start_node": 3}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 5, "entry_time": 0},
+    {"id": "P2", "source_node": 0, "destination_station": 5, "entry_time": 0},
+    {"id": "P3", "source_node": 0, "destination_station": 5, "entry_time": 2},
+    {"id": "P4", "source_node": 0, "destination_station": 5, "entry_time": 4}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "max_time_steps": 80,
+    "description": "Level 2: two drive units, one narrow bridge (capacity 1) on the shortest path to the station. Naive shortest-pathing blocks the second unit at the bridge for 6 time steps; the slightly longer detour is faster for it."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-W", "type": "storage"},
+    {"id": 1, "name": "Storage-E", "type": "storage"},
+    {"id": 2, "name": "Junction-A", "type": "travel"},
+    {"id": 3, "name": "Junction-B", "type": "travel"},
+    {"id": 4, "name": "Station-1", "type": "station"},
+    {"id": 5, "name": "Detour", "type": "travel"}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 2, "weight": 2},
+    {"from_node": 1, "to_node": 2, "weight": 2},
+    {"from_node": 2, "to_node": 3, "weight": 6, "capacity": 1},
+    {"from_node": 2, "to_node": 5, "weight": 4},
+    {"from_node": 5, "to_node": 3, "weight": 4},
+    {"from_node": 3, "to_node": 4, "weight": 2}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 1}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 4, "entry_time": 0},
+    {"id": "P2", "source_node": 1, "destination_station": 4, "entry_time": 0}
+  ]
+}

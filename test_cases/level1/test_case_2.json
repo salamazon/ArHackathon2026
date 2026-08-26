@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "max_time_steps": 150,
+    "description": "Level 1: single drive unit, three pods entering over time with two different destination stations. The unit must return to storage between runs. One route at a time."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-A", "type": "storage"},
+    {"id": 1, "name": "Aisle-1", "type": "travel"},
+    {"id": 2, "name": "Aisle-2", "type": "travel"},
+    {"id": 3, "name": "Station-1", "type": "station"},
+    {"id": 4, "name": "Aisle-3", "type": "travel"},
+    {"id": 5, "name": "Aisle-4", "type": "travel"},
+    {"id": 6, "name": "Station-2", "type": "station"},
+    {"id": 7, "name": "Aisle-5", "type": "travel"}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 1, "weight": 3},
+    {"from_node": 1, "to_node": 2, "weight": 3},
+    {"from_node": 2, "to_node": 3, "weight": 4},
+    {"from_node": 0, "to_node": 4, "weight": 2},
+    {"from_node": 4, "to_node": 5, "weight": 6},
+    {"from_node": 5, "to_node": 6, "weight": 3},
+    {"from_node": 1, "to_node": 5, "weight": 2},
+    {"from_node": 2, "to_node": 4, "weight": 5},
+    {"from_node": 3, "to_node": 7, "weight": 2},
+    {"from_node": 7, "to_node": 6, "weight": 2}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 3, "entry_time": 0},
+    {"id": "P2", "source_node": 0, "destination_station": 6, "entry_time": 20},
+    {"id": "P3", "source_node": 0, "destination_station": 3, "entry_time": 40}
+  ]
+}

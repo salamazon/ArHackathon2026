@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "max_time_steps": 200,
+    "description": "Level 3: two drive units that can carry two pods each, two storage nodes, and two stations with different capacities (Station-1 takes one unit at a time, Station-2 takes two). Eight pods with mixed destinations reward batching pickups and sequencing dock visits."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-N", "type": "storage"},
+    {"id": 1, "name": "Storage-S", "type": "storage"},
+    {"id": 2, "name": "Junction-N", "type": "travel"},
+    {"id": 3, "name": "Junction-S", "type": "travel"},
+    {"id": 4, "name": "Approach-1", "type": "travel"},
+    {"id": 5, "name": "Approach-2", "type": "travel"},
+    {"id": 6, "name": "Station-1", "type": "station", "capacity": 1},
+    {"id": 7, "name": "Station-2", "type": "station", "capacity": 2}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 2, "weight": 2},
+    {"from_node": 1, "to_node": 3, "weight": 2},
+    {"from_node": 2, "to_node": 3, "weight": 4},
+    {"from_node": 2, "to_node": 4, "weight": 3},
+    {"from_node": 3, "to_node": 5, "weight": 3},
+    {"from_node": 4, "to_node": 5, "weight": 2},
+    {"from_node": 4, "to_node": 6, "weight": 2},
+    {"from_node": 5, "to_node": 7, "weight": 2}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 2, "capacity": 2},
+    {"id": 1, "start_node": 3, "capacity": 2}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 6, "entry_time": 0},
+    {"id": "P2", "source_node": 0, "destination_station": 6, "entry_time": 0},
+    {"id": "P3", "source_node": 1, "destination_station": 7, "entry_time": 0},
+    {"id": "P4", "source_node": 1, "destination_station": 7, "entry_time": 0},
+    {"id": "P5", "source_node": 0, "destination_station": 7, "entry_time": 10},
+    {"id": "P6", "source_node": 1, "destination_station": 6, "entry_time": 10},
+    {"id": "P7", "source_node": 0, "destination_station": 6, "entry_time": 20},
+    {"id": "P8", "source_node": 1, "destination_station": 7, "entry_time": 20}
+  ]
+}
